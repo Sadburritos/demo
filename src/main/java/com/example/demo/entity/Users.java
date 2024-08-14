@@ -11,10 +11,12 @@ import jakarta.persistence.Id;
 public class Users {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+    
     private String username;
     private String password;
     private String email;
-    private long id;
+    
     public Users(String username, String password, String email, long id) {
         this.username = username;
         this.password = password;

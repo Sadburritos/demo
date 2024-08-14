@@ -2,16 +2,15 @@ package com.example.demo.repository;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.entity.Users;
 
 @Repository
-public interface UsersRepository extends JpaRepository<User, Long> {
+public interface UsersRepository extends JpaRepository<Users, Long> {
 
-  List<User> findByUsername(String username);
+  List<Users> findByUsername(String username);
 
-  User findById(long id);
+  Users findById(long id);
 }

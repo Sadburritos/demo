@@ -1,9 +1,5 @@
 package com.example.demo.controler;
 
-
-
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,37 +20,35 @@ public class GreetingController {
 		this.usersRepository = usersRepository;
 	}
 
-
 	@GetMapping("/users")
 
-	public Iterable<User> getAllUsers() {
-	
+	public Iterable<Users> getAllUsers() {
 
 		return usersRepository.findAll();
 	}
-	
 
 	@PostMapping("/users")
 	public String createNewUser(@RequestBody String entity) {
+		// Тут должно быть создание пользователя в репозитории
 		return "createNewUser";
 	}
 
 	@GetMapping("/users/{id}")
 	public String getUserById0(@PathVariable String id) {
-		Users Bob = new Users("Bob", "123", "bob@gmail.com", 1);
+		// Тут должно быть получение по id из репозитория
 
-		return Bob.toString();
+		return;
 	}
 
 	@PutMapping("/users/{id}")
 	public String UpdateUserById(@PathVariable String id, @RequestBody String entity) {
-		return "UpdateUserById";
+		// Тут получаешь по id . Если есть то сохраняешь(апдейт).
+
 	}
 
 	@DeleteMapping("/users/{id}")
 	public String deleteUserById(@PathVariable String id) {
-		return "deleteUserById";
+		// Тут удаляешь из репозитория
 	}
 
 }
-
