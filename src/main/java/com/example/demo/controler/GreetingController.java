@@ -37,18 +37,19 @@ public class GreetingController {
 	public String getUserById0(@PathVariable String id) {
 		// Тут должно быть получение по id из репозитория
 
-		return;
+		return "123";
 	}
 
 	@PutMapping("/users/{id}")
 	public String UpdateUserById(@PathVariable String id, @RequestBody String entity) {
 		// Тут получаешь по id . Если есть то сохраняешь(апдейт).
-
+		return "123";
 	}
 
 	@DeleteMapping("/users/{id}")
 	public String deleteUserById(@PathVariable String id) {
 		// Тут удаляешь из репозитория
+		return "123";
 	}
 
 }
