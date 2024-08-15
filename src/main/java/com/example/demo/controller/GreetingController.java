@@ -1,4 +1,8 @@
 package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +25,9 @@ public class GreetingController {
 
 	@GetMapping("/users")
 
-	public Iterable<Users> getAllUsers() {
-
-		return usersRepository.findAll();
+	public ResponseEntity<List<Users>> getAllUsers() {
+		List<Users> users = usersRepository.findAll();
+		return ResponseEntity.ok(users);
 	}
 
 	@PostMapping("/users")
@@ -31,7 +35,7 @@ public class GreetingController {
 		// Тут должно быть создание пользователя в репозитории
 		// На вход должен быть User user
 		return usersRepository.save();
-	} 
+	}
 
 	@GetMapping("/users/{id}")
 	public Long getUserById(@PathVariable Long id) {
