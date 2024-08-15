@@ -29,13 +29,14 @@ public class GreetingController {
 	@PostMapping("/users")
 	public String createNewUser(@RequestBody String entity) {
 		// Тут должно быть создание пользователя в репозитории
+		// На вход должен быть User user
 		return usersRepository.save();
 	} 
 
 	@GetMapping("/users/{id}")
 	public Long getUserById(@PathVariable Long id) {
 		// Тут должно быть получение по id из репозитория
-
+		// Возврат должен быть типа User
 		return usersRepository.findById(id);
 	}
 
@@ -48,6 +49,7 @@ public class GreetingController {
 	@DeleteMapping("/users/{id}")
 	public String deleteUserById(@PathVariable String id) {
 		// Тут удаляешь из репозитория
+		// Тут на возврат можно сделать void
 		return usersRepository.deleteAllById(id);
 	}
 
