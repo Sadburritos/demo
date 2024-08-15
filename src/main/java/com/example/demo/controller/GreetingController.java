@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +25,6 @@ public class GreetingController {
 	}
 
 	@GetMapping("/users")
-
 	public ResponseEntity<List<Users>> getAllUsers() {
 		List<Users> users = usersRepository.findAll();
 		return ResponseEntity.ok(users);
@@ -35,18 +32,13 @@ public class GreetingController {
 
 	@PostMapping("/users")
 	public ResponseEntity<Users> createNewUser(@RequestBody Users users) {
-		// Тут должно быть создание пользователя в репозитории
-		// На вход должен быть User user
 		Users savedUsers = usersRepository.save(users);
 
 		return ResponseEntity.ok(savedUsers);
 	}
 
 	@GetMapping("/users/{id}")
-	public ResponseEntity<Optional<Users>> getUserById(@PathVariable long id) {
-		// Тут должно быть получение по id из репозитория
-		// Возврат должен быть типа User
-
+	public ResponseEntity<Optional<Users>> getUserById(@PathVariable Integer id) {
 		Optional<Users> findedUsers = usersRepository.findById(id);
 
 		if (findedUsers.isEmpty()) {
@@ -57,9 +49,7 @@ public class GreetingController {
 	}
 
 	@PutMapping("/users/{id}")
-	public ResponseEntity<Users> UpdateUserById(@PathVariable long id, Users users) {
-		// Тут получаешь по id . Если есть то сохраняешь(апдейт).
-		
+	public ResponseEntity<Users> UpdateUserById(@PathVariable Integer id, Users users) {
 		Optional<Users> findedUsers = usersRepository.findById(id);
 
 		Users savedUsers = usersRepository.save(users);
@@ -73,13 +63,10 @@ public class GreetingController {
 	}
 
 	@DeleteMapping("/users/{id}")
-	public ResponseEntity<Void> deleteUserById(@PathVariable long id, Users users) {
-		// Тут удаляешь из репозитория
-		// Тут на возврат можно сделать void
-
+	public ResponseEntity<Void> deleteUserById(@PathVariable Integer id, Users users) {
 
 		usersRepository.deleteById(id);
-		
+
 		return ResponseEntity.ok().build();
 	}
 
