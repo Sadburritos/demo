@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,30 +34,53 @@ public class GreetingController {
 	}
 
 	@PostMapping("/users")
-	public String createNewUser(@RequestBody String entity) {
+	public ResponseEntity<Users> createNewUser(@RequestBody Users users) {
 		// Тут должно быть создание пользователя в репозитории
 		// На вход должен быть User user
-		return usersRepository.save();
+		Users savedUsers = usersRepository.save(users);
+
+		return ResponseEntity.ok(savedUsers);
 	}
 
 	@GetMapping("/users/{id}")
-	public Long getUserById(@PathVariable Long id) {
+	public ResponseEntity<Optional<Users>> getUserById(@PathVariable long id) {
 		// Тут должно быть получение по id из репозитория
 		// Возврат должен быть типа User
-		return usersRepository.findById(id);
+
+		Optional<Users> findedUsers = usersRepository.findById(id);
+
+		if (findedUsers.isEmpty()) {
+			return ResponseEntity.badRequest().build();
+		}
+
+		return ResponseEntity.ok(findedUsers);
 	}
 
 	@PutMapping("/users/{id}")
-	public String UpdateUserById(@PathVariable String id, @RequestBody String entity) {
+	public ResponseEntity<Users> UpdateUserById(@PathVariable long id, Users users) {
 		// Тут получаешь по id . Если есть то сохраняешь(апдейт).
-		return "123";
+		
+		Optional<Users> findedUsers = usersRepository.findById(id);
+
+		Users savedUsers = usersRepository.save(users);
+
+		if (findedUsers.isEmpty()) {
+			return ResponseEntity.badRequest().build();
+		}
+
+		return ResponseEntity.ok(savedUsers);
+
 	}
 
 	@DeleteMapping("/users/{id}")
-	public String deleteUserById(@PathVariable String id) {
+	public ResponseEntity<Void> deleteUserById(@PathVariable long id, Users users) {
 		// Тут удаляешь из репозитория
 		// Тут на возврат можно сделать void
-		return usersRepository.deleteAllById(id);
+
+
+		usersRepository.deleteById(id);
+		
+		return ResponseEntity.ok().build();
 	}
 
 }
